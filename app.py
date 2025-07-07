@@ -236,14 +236,34 @@ def Priority_2_Tickets():
     if site_code_input:
         st.write(f"Searching for technicians for site: **{site_code_input}**")
         try:
-            response = supabase.from_('TECH INFORMATION').select("*").eq('SITE', site_code_input).execute()
-            data = response.data
-            if data:
+            tech_info_response = supabase.from_('TECH INFORMATION').select("*").eq('SITE', site_code_input).execute()
+            tech_info_data = tech_info_response.data
+            names_and_sites_response = supabase.from_('names_and_sites').select("*").execute()
+            names_and_sites_data = names_and_sites_response.data
+            if tech_info_data and names_and_sites_data:
                 import pandas as pd
-                df = pd.DataFrame(data)
-                st.dataframe(df)
-            else:
+                df_tech_info = pd.DataFrame(tech_info_data)
+                df_names_and_sites = pd.DataFrame(names_and_sites_data)
+                df_tech_info['Full Name'] = df_tech_info['FIRST NAME'].fillna('') + ' ' + df_tech_info['LAST NAME'].fillna('')
+                df_tech_info['Full Name'] = df_tech_info['Full Name'].str.strip()
+                df_names_and_sites_badged = df_names_and_sites[df_names_and_sites['Badge'] == 'YES']
+                merged_df = pd.merge(
+                    df_tech_info,
+                    df_names_and_sites_badged,
+                    left_on='Full Name',
+                    right_on='Name',
+                    how='inner')
+                if not merged_df.empty:
+                    original_tech_info_columns = [col for col in df_tech_info.columns if col not in ['Full Name']]
+                    st.dataframe(merged_df[original_tech_info_columns])
+                else:
+                    st.info(f"No matching technicians with a 'YES' badge found for site code: **{site_code_input}**")
+            elif tech_info_data and not names_and_sites_data:
+                st.info("No data found in 'names_and_sites' to cross-reference technicians.")
+            elif not tech_info_data and names_and_sites_data:
                 st.info(f"No technician information found for site code: **{site_code_input}**")
+            else:
+                st.info(f"No technician information or badge information found for site code: **{site_code_input}**")
         except Exception as e:
             st.error(f"An error occurred while fetching data from Supabase: {e}")
             st.warning("Please ensure your Supabase URL, Anon Key, and table/column names are correct.")
@@ -368,14 +388,34 @@ def Priority_3_Tickets():
     if site_code_input:
         st.write(f"Searching for technicians for site: **{site_code_input}**")
         try:
-            response = supabase.from_('TECH INFORMATION').select("*").eq('SITE', site_code_input).execute()
-            data = response.data
-            if data:
+            tech_info_response = supabase.from_('TECH INFORMATION').select("*").eq('SITE', site_code_input).execute()
+            tech_info_data = tech_info_response.data
+            names_and_sites_response = supabase.from_('names_and_sites').select("*").execute()
+            names_and_sites_data = names_and_sites_response.data
+            if tech_info_data and names_and_sites_data:
                 import pandas as pd
-                df = pd.DataFrame(data)
-                st.dataframe(df)
-            else:
+                df_tech_info = pd.DataFrame(tech_info_data)
+                df_names_and_sites = pd.DataFrame(names_and_sites_data)
+                df_tech_info['Full Name'] = df_tech_info['FIRST NAME'].fillna('') + ' ' + df_tech_info['LAST NAME'].fillna('')
+                df_tech_info['Full Name'] = df_tech_info['Full Name'].str.strip()
+                df_names_and_sites_badged = df_names_and_sites[df_names_and_sites['Badge'] == 'YES']
+                merged_df = pd.merge(
+                    df_tech_info,
+                    df_names_and_sites_badged,
+                    left_on='Full Name',
+                    right_on='Name',
+                    how='inner')
+                if not merged_df.empty:
+                    original_tech_info_columns = [col for col in df_tech_info.columns if col not in ['Full Name']]
+                    st.dataframe(merged_df[original_tech_info_columns])
+                else:
+                    st.info(f"No matching technicians with a 'YES' badge found for site code: **{site_code_input}**")
+            elif tech_info_data and not names_and_sites_data:
+                st.info("No data found in 'names_and_sites' to cross-reference technicians.")
+            elif not tech_info_data and names_and_sites_data:
                 st.info(f"No technician information found for site code: **{site_code_input}**")
+            else:
+                st.info(f"No technician information or badge information found for site code: **{site_code_input}**")
         except Exception as e:
             st.error(f"An error occurred while fetching data from Supabase: {e}")
             st.warning("Please ensure your Supabase URL, Anon Key, and table/column names are correct.")
@@ -501,14 +541,34 @@ def Priority_4_Tickets():
     if site_code_input:
         st.write(f"Searching for technicians for site: **{site_code_input}**")
         try:
-            response = supabase.from_('TECH INFORMATION').select("*").eq('SITE', site_code_input).execute()
-            data = response.data
-            if data:
+            tech_info_response = supabase.from_('TECH INFORMATION').select("*").eq('SITE', site_code_input).execute()
+            tech_info_data = tech_info_response.data
+            names_and_sites_response = supabase.from_('names_and_sites').select("*").execute()
+            names_and_sites_data = names_and_sites_response.data
+            if tech_info_data and names_and_sites_data:
                 import pandas as pd
-                df = pd.DataFrame(data)
-                st.dataframe(df)
-            else:
+                df_tech_info = pd.DataFrame(tech_info_data)
+                df_names_and_sites = pd.DataFrame(names_and_sites_data)
+                df_tech_info['Full Name'] = df_tech_info['FIRST NAME'].fillna('') + ' ' + df_tech_info['LAST NAME'].fillna('')
+                df_tech_info['Full Name'] = df_tech_info['Full Name'].str.strip()
+                df_names_and_sites_badged = df_names_and_sites[df_names_and_sites['Badge'] == 'YES']
+                merged_df = pd.merge(
+                    df_tech_info,
+                    df_names_and_sites_badged,
+                    left_on='Full Name',
+                    right_on='Name',
+                    how='inner')
+                if not merged_df.empty:
+                    original_tech_info_columns = [col for col in df_tech_info.columns if col not in ['Full Name']]
+                    st.dataframe(merged_df[original_tech_info_columns])
+                else:
+                    st.info(f"No matching technicians with a 'YES' badge found for site code: **{site_code_input}**")
+            elif tech_info_data and not names_and_sites_data:
+                st.info("No data found in 'names_and_sites' to cross-reference technicians.")
+            elif not tech_info_data and names_and_sites_data:
                 st.info(f"No technician information found for site code: **{site_code_input}**")
+            else:
+                st.info(f"No technician information or badge information found for site code: **{site_code_input}**")
         except Exception as e:
             st.error(f"An error occurred while fetching data from Supabase: {e}")
             st.warning("Please ensure your Supabase URL, Anon Key, and table/column names are correct.")
