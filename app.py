@@ -176,7 +176,7 @@ def Priority_2_Tickets():
     st.write("---")
     st.write("I. Click on the ticket in Connectwise")
 
-    img_path = r"C:\Users\CallawayCrenshaw\Pictures\Screenshots\PICTURE_1.png"
+    img_path = "Screenshot 2025-05-13 130545.png"
     if not os.path.exists(img_path):
         st.error(f"Error: Image file not found at '{img_path}'. Please check the path.")
         return
@@ -309,7 +309,7 @@ def Priority_3_Tickets():
     st.write("---")
     st.write("I. Click on the ticket in Connectwise")
 
-    img_path = r"C:\Users\CallawayCrenshaw\Pictures\Screenshots\PICTURE_1.png"
+    img_path = "Screenshot 2025-05-13 130545.png"
     if not os.path.exists(img_path):
         st.error(f"Error: Image file not found at '{img_path}'. Please check the path.")
         return
@@ -442,7 +442,7 @@ def Priority_4_Tickets():
     st.write("---")
     st.write("I. Click on the ticket in Connectwise")
 
-    img_path = r"C:\Users\CallawayCrenshaw\Pictures\Screenshots\PICTURE_1.png"
+    img_path = "Screenshot 2025-05-13 130545.png"
     if not os.path.exists(img_path):
         st.error(f"Error: Image file not found at '{img_path}'. Please check the path.")
         return
