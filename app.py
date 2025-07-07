@@ -41,9 +41,9 @@ def home_page():
 def Priority_1_Tickets():
     st.title("P1 Runbook")
     st.write("---")
-    st.write("I. Click on the ticket in Connectwise")
+    st.write("I. In ConnectWise, click on the ticket")
 
-    img_path = "Screenshot 2025-05-13 130545.png"
+    img_path = "Screenshot 2025-05-13 130224.png"
     if not os.path.exists(img_path):
         st.error(f"Error: Image file not found at '{img_path}'. Please check the path.")
         return
@@ -62,16 +62,16 @@ def Priority_1_Tickets():
             st.image(img, use_container_width=True)
             st.markdown("""
             **Site Directions:**
-            1. Check the Site Field
-                1. If the Site Field has a 3 Letter Code, Look in the description and validate that code.
-                2. If the Site Field says Additional Site, then find the Sites Continued section in the Initial Description box and change the Site Field to that code.
+            1. Check the Site Field in the Company: DXC-HP box in ConnectWise
+                1. If the Field: Site has a 3 Letter Code, Look in the description and validate that code.
+                2. If the Field: Site says Additional Site, then find the Sites Continued section in the Initial Description box and change the Field: Site to that code.
             """)
     st.write("---")
     st.write("II: Identify the Service Window")
     st.markdown("""
                 ** Steps: **
-                1. Look at the Start Date of Request and Start Time of Request
-                2. Look at End Date of Request and End Time of Request
+                1. Look at the Start Date of Request and Start Time of Request in the ConnectWise Ticket
+                2. Look at End Date of Request and End Time of Request in the ConnectWise Ticket
                     1. **If these are the same day, then this is a hard start arrival, this means that the technician must be available to be on site at this start time.**
                     2. **If these are on different days, then this is a schedulable window, schedule the service window during normal business hours unless specified otherwise.**
                 """)
@@ -174,9 +174,9 @@ def Priority_1_Tickets():
 def Priority_2_Tickets():
     st.title("P2 Runbook")
     st.write("---")
-    st.write("I. Click on the ticket in Connectwise")
+    st.write("I. In ConnectWise, click on the ticket")
 
-    img_path = "Screenshot 2025-05-13 130545.png"
+    img_path = "Screenshot 2025-05-13 130224.png"
     if not os.path.exists(img_path):
         st.error(f"Error: Image file not found at '{img_path}'. Please check the path.")
         return
@@ -195,16 +195,16 @@ def Priority_2_Tickets():
             st.image(img, use_container_width=True)
             st.markdown("""
             **Site Directions:**
-            1. Check the Site Field
-                1. If the Site Field has a 3 Letter Code, Look in the description and validate that code.
-                2. If the Site Field says Additional Site, then find the Sites Continued section in the Initial Description box and change the Site Field to that code.
+            1. Check the Site Field in the Company: DXC-HP box in ConnectWise
+                1. If the Field: Site has a 3 Letter Code, Look in the description and validate that code.
+                2. If the Field: Site says Additional Site, then find the Sites Continued section in the Initial Description box and change the Field: Site to that code.
             """)
     st.write("---")
     st.write("II: Identify the Service Window")
     st.markdown("""
                 ** Steps: **
-                1. Look at the Start Date of Request and Start Time of Request
-                2. Look at End Date of Request and End Time of Request
+                1. Look at the Start Date of Request and Start Time of Request in the ConnectWise Ticket
+                2. Look at End Date of Request and End Time of Request in the ConnectWise Ticket
                     1. **If these are the same day, then this is a hard start arrival, this means that the technician must be available to be on site at this start time.**
                     2. **If these are on different days, then this is a schedulable window, schedule the service window during normal business hours unless specified otherwise.**
                 """)
@@ -307,9 +307,9 @@ def Priority_2_Tickets():
 def Priority_3_Tickets():
     st.title("P3 Runbook")
     st.write("---")
-    st.write("I. Click on the ticket in Connectwise")
+    st.write("I. In ConnectWise, click on the ticket")
 
-    img_path = "Screenshot 2025-05-13 130545.png"
+    img_path = "Screenshot 2025-05-13 130224.png"
     if not os.path.exists(img_path):
         st.error(f"Error: Image file not found at '{img_path}'. Please check the path.")
         return
@@ -328,20 +328,19 @@ def Priority_3_Tickets():
             st.image(img, use_container_width=True)
             st.markdown("""
             **Site Directions:**
-            1. Check the Site Field
-                1. If the Site Field has a 3 Letter Code, Look in the description and validate that code.
-                2. If the Site Field says Additional Site, then find the Sites Continued section in the Initial Description box and change the Site Field to that code.
+            1. Check the Site Field in the Company: DXC-HP box in ConnectWise
+                1. If the Field: Site has a 3 Letter Code, Look in the description and validate that code.
+                2. If the Field: Site says Additional Site, then find the Sites Continued section in the Initial Description box and change the Field: Site to that code.
             """)
     st.write("---")
     st.write("II: Identify the Service Window")
     st.markdown("""
                 ** Steps: **
-                1. Look at the Start Date of Request and Start Time of Request
-                2. Look at End Date of Request and End Time of Request
+                1. Look at the Start Date of Request and Start Time of Request in the ConnectWise Ticket
+                2. Look at End Date of Request and End Time of Request in the ConnectWise Ticket
                     1. **If these are the same day, then this is a hard start arrival, this means that the technician must be available to be on site at this start time.**
                     2. **If these are on different days, then this is a schedulable window, schedule the service window during normal business hours unless specified otherwise.**
                 """)
-    st.write("---")
     st.write("III. Identify a Technician for the Site:")
     site_code_input = st.text_input(
         "Enter 3-Letter Site Code:",
@@ -440,9 +439,9 @@ def Priority_3_Tickets():
 def Priority_4_Tickets():
     st.title("P4 Runbook")
     st.write("---")
-    st.write("I. Click on the ticket in Connectwise")
+    st.write("I. In ConnectWise, click on the ticket")
 
-    img_path = "Screenshot 2025-05-13 130545.png"
+    img_path = "Screenshot 2025-05-13 130224.png"
     if not os.path.exists(img_path):
         st.error(f"Error: Image file not found at '{img_path}'. Please check the path.")
         return
@@ -461,16 +460,16 @@ def Priority_4_Tickets():
             st.image(img, use_container_width=True)
             st.markdown("""
             **Site Directions:**
-            1. Check the Site Field
-                1. If the Site Field has a 3 Letter Code, Look in the description and validate that code.
-                2. If the Site Field says Additional Site, then find the Sites Continued section in the Initial Description box and change the Site Field to that code.
+            1. Check the Site Field in the Company: DXC-HP box in ConnectWise
+                1. If the Field: Site has a 3 Letter Code, Look in the description and validate that code.
+                2. If the Field: Site says Additional Site, then find the Sites Continued section in the Initial Description box and change the Field: Site to that code.
             """)
     st.write("---")
     st.write("II: Identify the Service Window")
     st.markdown("""
                 ** Steps: **
-                1. Look at the Start Date of Request and Start Time of Request
-                2. Look at End Date of Request and End Time of Request
+                1. Look at the Start Date of Request and Start Time of Request in the ConnectWise Ticket
+                2. Look at End Date of Request and End Time of Request in the ConnectWise Ticket
                     1. **If these are the same day, then this is a hard start arrival, this means that the technician must be available to be on site at this start time.**
                     2. **If these are on different days, then this is a schedulable window, schedule the service window during normal business hours unless specified otherwise.**
                 """)
