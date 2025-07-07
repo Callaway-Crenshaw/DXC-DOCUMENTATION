@@ -75,7 +75,6 @@ def Priority_1_Tickets():
                     1. **If these are the same day, then this is a hard start arrival, this means that the technician must be available to be on site at this start time.**
                     2. **If these are on different days, then this is a schedulable window, schedule the service window during normal business hours unless specified otherwise.**
                 """)
-    st.write("---")
     st.write("III. Identify a Technician for the Site:")
     site_code_input = st.text_input(
         "Enter 3-Letter Site Code:",
@@ -84,14 +83,31 @@ def Priority_1_Tickets():
     if site_code_input:
         st.write(f"Searching for technicians for site: **{site_code_input}**")
         try:
-            response = supabase.from_('TECH INFORMATION').select("*").eq('SITE', site_code_input).execute()
-            data = response.data
-            if data:
+            tech_info_response = supabase.from_('TECH INFORMATION').select("*").eq('SITE', site_code_input).execute()
+            tech_info_data = tech_info_response.data
+            names_and_sites_response = supabase.from_('names_and_sites').select("*").execute()
+            names_and_sites_data = names_and_sites_response.data
+            if tech_info_data and names_and_sites_data:
                 import pandas as pd
-                df = pd.DataFrame(data)
-                st.dataframe(df)
-            else:
+                df_tech_info = pd.DataFrame(tech_info_data)
+                df_names_and_sites = pd.DataFrame(names_and_sites_data)
+                df_names_and_sites_badged = df_names_and_sites[df_names_and_sites['Badge'] == 'YES']
+                merged_df = pd.merge(
+                    df_tech_info,
+                    df_names_and_sites_badged,
+                    left_on='Technician',
+                    right_on='Name',
+                    how='inner')
+                if not merged_df.empty:
+                    st.dataframe(merged_df[df_tech_info.columns])
+                else:
+                    st.info(f"No matching technicians with a 'YES' badge found for site code: **{site_code_input}**")
+            elif tech_info_data and not names_and_sites_data:
+                st.info("No data found in 'names_and_sites' to cross-reference technicians.")
+            elif not tech_info_data and names_and_sites_data:
                 st.info(f"No technician information found for site code: **{site_code_input}**")
+            else:
+                st.info(f"No technician information or badge information found for site code: **{site_code_input}**")
         except Exception as e:
             st.error(f"An error occurred while fetching data from Supabase: {e}")
             st.warning("Please ensure your Supabase URL, Anon Key, and table/column names are correct.")
