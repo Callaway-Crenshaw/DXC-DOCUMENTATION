@@ -91,15 +91,18 @@ def Priority_1_Tickets():
                 import pandas as pd
                 df_tech_info = pd.DataFrame(tech_info_data)
                 df_names_and_sites = pd.DataFrame(names_and_sites_data)
+                df_tech_info['Full Name'] = df_tech_info['FIRST NAME'].fillna('') + ' ' + df_tech_info['LAST NAME'].fillna('')
+                df_tech_info['Full Name'] = df_tech_info['Full Name'].str.strip()
                 df_names_and_sites_badged = df_names_and_sites[df_names_and_sites['Badge'] == 'YES']
                 merged_df = pd.merge(
                     df_tech_info,
                     df_names_and_sites_badged,
-                    left_on='Technician',
+                    left_on='Full Name',
                     right_on='Name',
                     how='inner')
                 if not merged_df.empty:
-                    st.dataframe(merged_df[df_tech_info.columns])
+                    original_tech_info_columns = [col for col in df_tech_info.columns if col not in ['Full Name']]
+                    st.dataframe(merged_df[original_tech_info_columns])
                 else:
                     st.info(f"No matching technicians with a 'YES' badge found for site code: **{site_code_input}**")
             elif tech_info_data and not names_and_sites_data:
