@@ -186,6 +186,7 @@ def Priority_1_Tickets():
             7. Once the work order is routed in FieldNation, go into the ticket in ConnectWise and add a new note in Discussion
                 1. Fill out this form with the Technicians Name, Email, and ETA
                     1. Name: TECHNICIAN NAME, Mail: TECHNICIAN EMAIL, ETA: DATE/TIME
+            8. If needed, adjust the title of the ConnectWise ticket to reflect the accurate date, and adjust the Start Date of Request to the start date.
                 """)
     st.write("---")
     st.write("VI. Work Order Specifics")
@@ -362,6 +363,7 @@ def Priority_2_Tickets():
             7. Once the work order is routed in FieldNation, go into the ticket in ConnectWise and add a new note in Discussion
                 1. Fill out this form with the Technicians Name, Email, and ETA
                     1. Name: TECHNICIAN NAME, Mail: TECHNICIAN EMAIL, ETA: DATE/TIME
+            8. If needed, adjust the title of the ConnectWise ticket to reflect the accurate date, and adjust the Start Date of Request to the start date.
                 """)
     st.write("---")
     st.write("VI. Work Order Specifics")
@@ -537,6 +539,7 @@ def Priority_3_Tickets():
             7. Once the work order is routed in FieldNation, go into the ticket in ConnectWise and add a new note in Discussion
                 1. Fill out this form with the Technicians Name, Email, and ETA
                     1. Name: TECHNICIAN NAME, Mail: TECHNICIAN EMAIL, ETA: DATE/TIME
+            8. If needed, adjust the title of the ConnectWise ticket to reflect the accurate date, and adjust the Start Date of Request to the start date.
                 """)
     st.write("---")
     st.write("VI. Work Order Specifics")
@@ -713,6 +716,7 @@ def Priority_4_Tickets():
             7. Once the work order is routed in FieldNation, go into the ticket in ConnectWise and add a new note in Discussion
                 1. Fill out this form with the Technicians Name, Email, and ETA
                     1. Name: TECHNICIAN NAME, Mail: TECHNICIAN EMAIL, ETA: DATE/TIME
+            8. If needed, adjust the title of the ConnectWise ticket to reflect the accurate date, and adjust the Start Date of Request to the start date.
                 """)
     st.write("---")
     st.write("VI. Work Order Specifics")
