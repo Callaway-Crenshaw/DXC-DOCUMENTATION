@@ -157,24 +157,19 @@ def Priority_1_Tickets():
             return
     st.image(images[0], width=300, caption="Scroll and Follow All")
     modal = Modal(key="CW Screenshot 2", title="Scroll and Follow All")
-    if st.button("Click for More Details"):
+    if st.button("Click Here First"):
         modal.open()
     if modal.is_open():
         with modal.container():
             st.header("Steps")
-            st.image(images[0], use_container_width=True, caption="1. Company Box Overview")
+            st.image(images[0], use_container_width=True)
             st.write("Once the Technician has been identified, change the ticket status to dispatched in Connectwise")
-            st.image(images[1], use_container_width=True, caption="2. Site Field Location")
+            st.image(images[1], use_container_width=True)
             st.write("Save and refresh the ticket until you see a WO# appear in Connectwise")
-            st.image(images[2], use_container_width=True, caption="3. Description Field for Site Code")
+            st.image(images[2], use_container_width=True)
             st.write("Then change the status to work order created and save and close the ticket")
-
-
-
-
-
     st.markdown("""
-            1. Login to field nation using your credentials
+            1. Next, Login to field nation using your credentials
                 1. Here is the Link: https://app.fieldnation.com/workorders
             2. Click on the Work tab at the top of the screen and then click Flightboard
             3. Navigate to the Draft tab on the flightboard
@@ -322,29 +317,51 @@ def Priority_2_Tickets():
                 """)
     st.write("---")
     st.write("V. Assigning the Work Order in Field Nation")
+    img_path1="Screenshot 2025-05-13 130823.png"
+    img_path2="Screenshot 2025-05-13 131035.png"
+    img_path3="Screenshot 2025-05-13 131057.png"
+    images = []
+    image_paths = [img_path1, img_path2, img_path3]
+    for path in image_paths:
+        if not os.path.exists(path):
+            st.error(f"Error: Image file not found at '{path}'. Please check the path.")
+            return
+        try:
+            images.append(Image.open(path))
+        except Exception as e:
+            st.error(f"Error loading image '{path}': {e}")
+            return
+    st.image(images[0], width=300, caption="Scroll and Follow All")
+    modal = Modal(key="CW Screenshot 2", title="Scroll and Follow All")
+    if st.button("Click Here First"):
+        modal.open()
+    if modal.is_open():
+        with modal.container():
+            st.header("Steps")
+            st.image(images[0], use_container_width=True)
+            st.write("Once the Technician has been identified, change the ticket status to dispatched in Connectwise")
+            st.image(images[1], use_container_width=True)
+            st.write("Save and refresh the ticket until you see a WO# appear in Connectwise")
+            st.image(images[2], use_container_width=True)
+            st.write("Then change the status to work order created and save and close the ticket")
     st.markdown("""
-                1. In Connectwise:
-                    1. Change the ticket status to Dispatched
-                    2. Once that status has been changed, save and refresh the ticket
-                    3. Keep refreshing until you see a WO# created in the Additional Details section in ConnectWise
-                    4. Once the WO# is created in ConnectWise, move the ticket status to Work Order Created and save the ticket
-                2. Login to field nation using your credentials
-                    1. Here is the Link: https://app.fieldnation.com/workorders
-                3. Click on the Work tab at the top of the screen and then click Flightboard
-                4. Navigate to the Draft tab on the flightboard
-                5. Here you should see the work order as a draft, find the corresponding ID on the Draft page with the ConnectWise WO# and click on the corresponding title
-                6. Once in the work order, there are a few things that need to be checked
-                    1. Click on the Schedule box inside the work order
-                        1. Change Schedule Type to (Hard Start)
-                        2. Change the Date and Time to the agreed upon Date/Time and hit Save
-                7. Once the work order has been validated, go to the Providors tab inside the work order
-                    1. Select Find Providors tab
-                    2. Copy and paste the corresponding Field Nation ID from step 3 for the Identified Technician into the find providor search bar and hit enter
-                    3. Validate that this is the correct name of the Identified Technician
-                    4. Then slect the route button that is purple
-                8. Once the work order is routed in FieldNation, go into the ticket in ConnectWise and add a new note in Discussion
-                    1. Fill out this form with the Technicians Name, Email, and ETA
-                        1. Name: TECHNICIAN NAME, Mail: TECHNICIAN EMAIL, ETA: DATE/TIME
+            1. Next, Login to field nation using your credentials
+                1. Here is the Link: https://app.fieldnation.com/workorders
+            2. Click on the Work tab at the top of the screen and then click Flightboard
+            3. Navigate to the Draft tab on the flightboard
+            4. Here you should see the work order as a draft, find the corresponding ID on the Draft page with the ConnectWise WO# and click on the corresponding title
+            5. Once in the work order, there are a few things that need to be checked
+                1. Click on the Schedule box inside the work order
+                    1. Change Schedule Type to (Hard Start)
+                    2. Change the Date and Time to the agreed upon Date/Time and hit Save
+            6. Once the work order has been validated, go to the Providors tab inside the work order
+                1. Select Find Providors tab
+                2. Copy and paste the corresponding Field Nation ID from step 3 for the Identified Technician into the find providor search bar and hit enter
+                3. Validate that this is the correct name of the Identified Technician
+                4. Then slect the route button that is purple
+            7. Once the work order is routed in FieldNation, go into the ticket in ConnectWise and add a new note in Discussion
+                1. Fill out this form with the Technicians Name, Email, and ETA
+                    1. Name: TECHNICIAN NAME, Mail: TECHNICIAN EMAIL, ETA: DATE/TIME
                 """)
     st.write("---")
     st.write("VI. Work Order Specifics")
@@ -475,29 +492,51 @@ def Priority_3_Tickets():
                 """)
     st.write("---")
     st.write("V. Assigning the Work Order in Field Nation")
+    img_path1="Screenshot 2025-05-13 130823.png"
+    img_path2="Screenshot 2025-05-13 131035.png"
+    img_path3="Screenshot 2025-05-13 131057.png"
+    images = []
+    image_paths = [img_path1, img_path2, img_path3]
+    for path in image_paths:
+        if not os.path.exists(path):
+            st.error(f"Error: Image file not found at '{path}'. Please check the path.")
+            return
+        try:
+            images.append(Image.open(path))
+        except Exception as e:
+            st.error(f"Error loading image '{path}': {e}")
+            return
+    st.image(images[0], width=300, caption="Scroll and Follow All")
+    modal = Modal(key="CW Screenshot 2", title="Scroll and Follow All")
+    if st.button("Click Here First"):
+        modal.open()
+    if modal.is_open():
+        with modal.container():
+            st.header("Steps")
+            st.image(images[0], use_container_width=True)
+            st.write("Once the Technician has been identified, change the ticket status to dispatched in Connectwise")
+            st.image(images[1], use_container_width=True)
+            st.write("Save and refresh the ticket until you see a WO# appear in Connectwise")
+            st.image(images[2], use_container_width=True)
+            st.write("Then change the status to work order created and save and close the ticket")
     st.markdown("""
-                1. In Connectwise:
-                    1. Change the ticket status to Dispatched
-                    2. Once that status has been changed, save and refresh the ticket
-                    3. Keep refreshing until you see a WO# created in the Additional Details section in ConnectWise
-                    4. Once the WO# is created in ConnectWise, move the ticket status to Work Order Created and save the ticket
-                2. Login to field nation using your credentials
-                    1. Here is the Link: https://app.fieldnation.com/workorders
-                3. Click on the Work tab at the top of the screen and then click Flightboard
-                4. Navigate to the Draft tab on the flightboard
-                5. Here you should see the work order as a draft, find the corresponding ID on the Draft page with the ConnectWise WO# and click on the corresponding title
-                6. Once in the work order, there are a few things that need to be checked
-                    1. Click on the Schedule box inside the work order
-                        1. Change Schedule Type to (Hard Start)
-                        2. Change the Date and Time to the agreed upon Date/Time and hit Save
-                7. Once the work order has been validated, go to the Providors tab inside the work order
-                    1. Select Find Providors tab
-                    2. Copy and paste the corresponding Field Nation ID from step 3 for the Identified Technician into the find providor search bar and hit enter
-                    3. Validate that this is the correct name of the Identified Technician
-                    4. Then slect the route button that is purple
-                8. Once the work order is routed in FieldNation, go into the ticket in ConnectWise and add a new note in Discussion
-                    1. Fill out this form with the Technicians Name, Email, and ETA
-                        1. Name: TECHNICIAN NAME, Mail: TECHNICIAN EMAIL, ETA: DATE/TIME
+            1. Next, Login to field nation using your credentials
+                1. Here is the Link: https://app.fieldnation.com/workorders
+            2. Click on the Work tab at the top of the screen and then click Flightboard
+            3. Navigate to the Draft tab on the flightboard
+            4. Here you should see the work order as a draft, find the corresponding ID on the Draft page with the ConnectWise WO# and click on the corresponding title
+            5. Once in the work order, there are a few things that need to be checked
+                1. Click on the Schedule box inside the work order
+                    1. Change Schedule Type to (Hard Start)
+                    2. Change the Date and Time to the agreed upon Date/Time and hit Save
+            6. Once the work order has been validated, go to the Providors tab inside the work order
+                1. Select Find Providors tab
+                2. Copy and paste the corresponding Field Nation ID from step 3 for the Identified Technician into the find providor search bar and hit enter
+                3. Validate that this is the correct name of the Identified Technician
+                4. Then slect the route button that is purple
+            7. Once the work order is routed in FieldNation, go into the ticket in ConnectWise and add a new note in Discussion
+                1. Fill out this form with the Technicians Name, Email, and ETA
+                    1. Name: TECHNICIAN NAME, Mail: TECHNICIAN EMAIL, ETA: DATE/TIME
                 """)
     st.write("---")
     st.write("VI. Work Order Specifics")
@@ -629,29 +668,51 @@ def Priority_4_Tickets():
                 """)
     st.write("---")
     st.write("V. Assigning the Work Order in Field Nation")
+    img_path1="Screenshot 2025-05-13 130823.png"
+    img_path2="Screenshot 2025-05-13 131035.png"
+    img_path3="Screenshot 2025-05-13 131057.png"
+    images = []
+    image_paths = [img_path1, img_path2, img_path3]
+    for path in image_paths:
+        if not os.path.exists(path):
+            st.error(f"Error: Image file not found at '{path}'. Please check the path.")
+            return
+        try:
+            images.append(Image.open(path))
+        except Exception as e:
+            st.error(f"Error loading image '{path}': {e}")
+            return
+    st.image(images[0], width=300, caption="Scroll and Follow All")
+    modal = Modal(key="CW Screenshot 2", title="Scroll and Follow All")
+    if st.button("Click Here First"):
+        modal.open()
+    if modal.is_open():
+        with modal.container():
+            st.header("Steps")
+            st.image(images[0], use_container_width=True)
+            st.write("Once the Technician has been identified, change the ticket status to dispatched in Connectwise")
+            st.image(images[1], use_container_width=True)
+            st.write("Save and refresh the ticket until you see a WO# appear in Connectwise")
+            st.image(images[2], use_container_width=True)
+            st.write("Then change the status to work order created and save and close the ticket")
     st.markdown("""
-                1. In Connectwise:
-                    1. Change the ticket status to Dispatched
-                    2. Once that status has been changed, save and refresh the ticket
-                    3. Keep refreshing until you see a WO# created in the Additional Details section in ConnectWise
-                    4. Once the WO# is created in ConnectWise, move the ticket status to Work Order Created and save the ticket
-                2. Login to field nation using your credentials
-                    1. Here is the Link: https://app.fieldnation.com/workorders
-                3. Click on the Work tab at the top of the screen and then click Flightboard
-                4. Navigate to the Draft tab on the flightboard
-                5. Here you should see the work order as a draft, find the corresponding ID on the Draft page with the ConnectWise WO# and click on the corresponding title
-                6. Once in the work order, there are a few things that need to be checked
-                    1. Click on the Schedule box inside the work order
-                        1. Change Schedule Type to (Hard Start)
-                        2. Change the Date and Time to the agreed upon Date/Time and hit Save
-                7. Once the work order has been validated, go to the Providors tab inside the work order
-                    1. Select Find Providors tab
-                    2. Copy and paste the corresponding Field Nation ID from step 3 for the Identified Technician into the find providor search bar and hit enter
-                    3. Validate that this is the correct name of the Identified Technician
-                    4. Then slect the route button that is purple
-                8. Once the work order is routed in FieldNation, go into the ticket in ConnectWise and add a new note in Discussion
-                    1. Fill out this form with the Technicians Name, Email, and ETA
-                        1. Name: TECHNICIAN NAME, Mail: TECHNICIAN EMAIL, ETA: DATE/TIME
+            1. Next, Login to field nation using your credentials
+                1. Here is the Link: https://app.fieldnation.com/workorders
+            2. Click on the Work tab at the top of the screen and then click Flightboard
+            3. Navigate to the Draft tab on the flightboard
+            4. Here you should see the work order as a draft, find the corresponding ID on the Draft page with the ConnectWise WO# and click on the corresponding title
+            5. Once in the work order, there are a few things that need to be checked
+                1. Click on the Schedule box inside the work order
+                    1. Change Schedule Type to (Hard Start)
+                    2. Change the Date and Time to the agreed upon Date/Time and hit Save
+            6. Once the work order has been validated, go to the Providors tab inside the work order
+                1. Select Find Providors tab
+                2. Copy and paste the corresponding Field Nation ID from step 3 for the Identified Technician into the find providor search bar and hit enter
+                3. Validate that this is the correct name of the Identified Technician
+                4. Then slect the route button that is purple
+            7. Once the work order is routed in FieldNation, go into the ticket in ConnectWise and add a new note in Discussion
+                1. Fill out this form with the Technicians Name, Email, and ETA
+                    1. Name: TECHNICIAN NAME, Mail: TECHNICIAN EMAIL, ETA: DATE/TIME
                 """)
     st.write("---")
     st.write("VI. Work Order Specifics")
