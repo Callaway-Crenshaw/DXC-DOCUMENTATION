@@ -101,6 +101,7 @@ def Priority_1_Tickets():
                     right_on='Name',
                     how='inner')
                 if not merged_df.empty:
+                    merged_df = merged_df.drop_duplicates(subset=['FIRST NAME', 'LAST NAME', 'SITE'], keep='first')
                     original_tech_info_columns = [col for col in df_tech_info.columns if col not in ['Full Name']]
                     st.dataframe(merged_df[original_tech_info_columns])
                 else:
@@ -254,6 +255,7 @@ def Priority_2_Tickets():
                     right_on='Name',
                     how='inner')
                 if not merged_df.empty:
+                    merged_df = merged_df.drop_duplicates(subset=['FIRST NAME', 'LAST NAME', 'SITE'], keep='first')
                     original_tech_info_columns = [col for col in df_tech_info.columns if col not in ['Full Name']]
                     st.dataframe(merged_df[original_tech_info_columns])
                 else:
@@ -406,6 +408,7 @@ def Priority_3_Tickets():
                     right_on='Name',
                     how='inner')
                 if not merged_df.empty:
+                    merged_df = merged_df.drop_duplicates(subset=['FIRST NAME', 'LAST NAME', 'SITE'], keep='first')
                     original_tech_info_columns = [col for col in df_tech_info.columns if col not in ['Full Name']]
                     st.dataframe(merged_df[original_tech_info_columns])
                 else:
@@ -559,6 +562,7 @@ def Priority_4_Tickets():
                     right_on='Name',
                     how='inner')
                 if not merged_df.empty:
+                    merged_df = merged_df.drop_duplicates(subset=['FIRST NAME', 'LAST NAME', 'SITE'], keep='first')
                     original_tech_info_columns = [col for col in df_tech_info.columns if col not in ['Full Name']]
                     st.dataframe(merged_df[original_tech_info_columns])
                 else:
