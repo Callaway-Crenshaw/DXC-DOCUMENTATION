@@ -145,7 +145,7 @@ def Priority_1_Tickets():
     img_path2="Screenshot 2025-05-13 131035.png"
     img_path3="Screenshot 2025-05-13 131057.png"
     images = []
-    image_path = [img_path1, img_path2, img_path3]
+    image_paths = [img_path1, img_path2, img_path3]
     for path in image_paths:
         if not os.path.exists(path):
             st.error(f"Error: Image file not found at '{path}'. Please check the path.")
