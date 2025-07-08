@@ -141,7 +141,52 @@ def Priority_1_Tickets():
                 """)
     st.write("---")
     st.write("V. Assigning the Work Order in Field Nation")
-    st.markdown("""
+    img_path1="Screenshot 2025-05-13 130823.png"
+    img_path2="Screenshot 2025-05-13 131035.png"
+    img_path3="Screenshot 2025-05-13 131057.png"
+    images = []
+    image_path = [img_path1, img_path2, img_path3]
+    for path in image_paths:
+        if not os.path.exists(path):
+            st.error(f"Error: Image file not found at '{path}'. Please check the path.")
+            return
+        try:
+            images.append(Image.open(path))
+        except Exception as e:
+            st.error(f"Error loading image '{path}': {e}")
+            return
+    st.image(images[0], width=300, caption="Initial View of Connectwise Company Box")
+    modal = Modal(key="CW Screenshot", title="Connectwise Company Box Screenshot Details")
+    if st.button("Click for More Details"):
+        modal.open()
+    if modal.is_open():
+        with modal.container():
+            st.header("Connectwise Company Box - Detailed View")
+            st.subheader("Key Areas to Check:")
+            st.image(images[0], use_container_width=True, caption="1. Company Box Overview")
+            st.write("This is the main company box you see in ConnectWise.")
+            st.image(images[1], use_container_width=True, caption="2. Site Field Location")
+            st.write("Locate the 'Site' field as highlighted in this image.")
+            st.image(images[2], use_container_width=True, caption="3. Description Field for Site Code")
+            st.write("If 'Site' is 'Additional Site', check the description for the actual code.")
+
+
+            st.markdown("""
+            ---
+            **Site Directions (Detailed):**
+
+            1.  **Check the Site Field:** In the "Company: DXC-HP" box in ConnectWise, locate the "Site" field.
+                * If the "Field: Site" has a **3-Letter Code**, then look in the **description** and validate that code.
+                * If the "Field: Site" says **"Additional Site"**, then find the "Sites Continued" section in the **Initial Description box** and change the "Field: Site" to that code.
+
+            2.  **Ensure Consistency:** Always verify that the site code used matches any relevant documentation or internal systems.
+            """)
+
+
+
+
+
+        st.markdown("""
                 1. In Connectwise:
                     1. Change the ticket status to Dispatched
                     2. Once that status has been changed, save and refresh the ticket
