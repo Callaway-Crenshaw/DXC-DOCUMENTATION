@@ -156,7 +156,7 @@ def Priority_1_Tickets():
             st.error(f"Error loading image '{path}': {e}")
             return
     st.image(images[0], width=300, caption="Initial View of Connectwise Company Box")
-    modal = Modal(key="CW Screenshot", title="Connectwise Company Box Screenshot Details")
+    modal = Modal(key="CW Screenshot 2", title="Connectwise Company Box Screenshot Details")
     if st.button("Click for More Details"):
         modal.open()
     if modal.is_open():
