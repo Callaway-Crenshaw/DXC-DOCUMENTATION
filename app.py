@@ -79,44 +79,86 @@ def Priority_1_Tickets():
     site_code_input = st.text_input(
         "Enter 3-Letter Site Code:",
         max_chars=3,
-        help="e.g., 'ABC', 'XYZ'. This will filter technicians by site.").upper().strip()
+        help="e.g., 'ABC', 'XYZ'. This will filter technicians by site."
+    ).upper().strip()
+
     if site_code_input:
         st.write(f"Searching for technicians for site: **{site_code_input}**")
         try:
             tech_info_response = supabase.from_('TECH INFORMATION').select("*").eq('SITE', site_code_input).execute()
             tech_info_data = tech_info_response.data
+
             names_and_sites_response = supabase.from_('names_and_sites').select("*").execute()
             names_and_sites_data = names_and_sites_response.data
+
             if tech_info_data and names_and_sites_data:
-                import pandas as pd
                 df_tech_info = pd.DataFrame(tech_info_data)
                 df_names_and_sites = pd.DataFrame(names_and_sites_data)
+
                 df_tech_info['Full Name'] = df_tech_info['FIRST NAME'].fillna('') + ' ' + df_tech_info['LAST NAME'].fillna('')
                 df_tech_info['Full Name'] = df_tech_info['Full Name'].str.strip()
+
                 df_names_and_sites_badged = df_names_and_sites[df_names_and_sites['Badge'] == 'YES']
+
                 merged_df = pd.merge(
                     df_tech_info,
                     df_names_and_sites_badged,
                     left_on='Full Name',
                     right_on='Name',
-                    how='inner')
+                    how='inner'
+                )
+
                 if not merged_df.empty:
                     merged_df = merged_df.drop_duplicates(subset=['FIRST NAME', 'LAST NAME', 'SITE'], keep='first')
                     original_tech_info_columns = [col for col in df_tech_info.columns if col not in ['Full Name']]
-                    st.dataframe(merged_df[original_tech_info_columns])
+
+                # Configure column editing
+                    column_config = {
+                        "TECHNICIAN STATUS": st.column_config.CheckboxColumn(
+                            "TECHNICIAN STATUS",
+                            help="Check to set technician status to active/true",
+                            default=False,
+                        )
+                    }
+
+                # Make all other columns non-editable
+                    for col in original_tech_info_columns:
+                        if col != "TECHNICIAN STATUS":
+                            column_config[col] = st.column_config.TextColumn(
+                                col,
+                                disabled=True # This makes the column non-editable
+                            )
+                
+                # Display the editable DataFrame
+                    edited_df = st.data_editor(
+                        merged_df[original_tech_info_columns],
+                        column_config=column_config,
+                        hide_index=True,
+                        key="tech_status_editor" # Add a unique key for the widget
+                    )
+
+                # You can now access the changes in `edited_df`
+                # For example, to see what has changed:
+                # if not edited_df.equals(merged_df[original_tech_info_columns]):
+                #     st.write("Changes detected in technician status:")
+                #     st.dataframe(edited_df[edited_df['TECHNICIAN STATUS'] != merged_df['TECHNICIAN STATUS']])
+
                 else:
                     st.info(f"No matching technicians with a 'YES' badge found for site code: **{site_code_input}**")
+
             elif tech_info_data and not names_and_sites_data:
                 st.info("No data found in 'names_and_sites' to cross-reference technicians.")
             elif not tech_info_data and names_and_sites_data:
                 st.info(f"No technician information found for site code: **{site_code_input}**")
             else:
                 st.info(f"No technician information or badge information found for site code: **{site_code_input}**")
+
         except Exception as e:
             st.error(f"An error occurred while fetching data from Supabase: {e}")
             st.warning("Please ensure your Supabase URL, Anon Key, and table/column names are correct.")
     else:
         st.info("Please enter a 3-letter site code to search for technicians.")
+
     st.write("---")
     st.write("IV. Contact the Technician")
     st.markdown("""
