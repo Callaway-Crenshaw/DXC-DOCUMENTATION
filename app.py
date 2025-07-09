@@ -117,7 +117,8 @@ def Priority_1_Tickets():
                                 column_config[col] = st.column_config.TextColumn(
                                     col,
                                     disabled=True)
-                    st.subheader("Edit Technician Status:")
+                    st.subheader("Technician Status:")
+                    st.markdown("""If all Technician Boxes are checked for the site, then uncheck them all before contacting the Technicians. Contact the Technicians with unchecked boxes for the site first. Then once one is identified, check the status box if it is unchecked""")
                     edited_df = st.data_editor(
                         merged_df[display_columns],
                         column_config=column_config,
@@ -157,8 +158,6 @@ def Priority_1_Tickets():
                     if not changes_made_to_db:
                         st.info("No changes were detected in 'TECHNICIAN STATUS' to update in Supabase.")
                     st.markdown("---")
-                    st.subheader("Current Technician Data (Refreshed after updates):")
-                    st.dataframe(edited_df)
                 else:
                     st.info(f"No matching technicians with a 'YES' badge found for site code: **{site_code_input}**")
             elif tech_info_data and not names_and_sites_data:
