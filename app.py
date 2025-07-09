@@ -87,7 +87,7 @@ def Priority_1_Tickets():
         st.write(f"Searching for technicians for site: **{site_code_input}**")
         try:
         # --- MODIFICATION 1: Fetch 'id' along with other columns ---
-            tech_info_response = supabase.from_('TECH INFORMATION').select("*, id").eq('SITE', site_code_input).execute()
+            tech_info_response = supabase.from_('TECH INFORMATION').select("*, ID").eq('SITE', site_code_input).execute()
             tech_info_data = tech_info_response.data
 
             names_and_sites_response = supabase.from_('names_and_sites').select("*").execute()
@@ -115,7 +115,7 @@ def Priority_1_Tickets():
     
                     # --- MODIFICATION 2: Store original 'TECHNICIAN STATUS' and 'id' for comparison ---
                     # This dataframe holds the state BEFORE any user edits in st.data_editor
-                    original_status_df = merged_df[['id', 'TECHNICIAN STATUS']].copy()
+                    original_status_df = merged_df[['ID', 'TECHNICIAN STATUS']].copy()
     
                     # Columns to display in the data_editor
                     # We need 'id' to be present in the DataFrame passed to data_editor
@@ -163,7 +163,7 @@ def Priority_1_Tickets():
                     for index, edited_row in edited_df.iterrows():
                         # Find the corresponding original status using the 'id'
                         original_row_status = original_status_df[
-                            original_status_df['id'] == edited_row['id']
+                            original_status_df['ID'] == edited_row['ID']
                         ]['TECHNICIAN STATUS'].iloc[0] # .iloc[0] to get the scalar value
     
                         current_status_in_editor = edited_row['TECHNICIAN STATUS']
