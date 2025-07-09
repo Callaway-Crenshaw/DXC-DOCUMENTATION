@@ -82,14 +82,14 @@ def Priority_1_Tickets():
         max_chars=3,
         help="e.g., 'ABC', 'XYZ'. This will filter technicians by site."
     ).upper().strip()
-
+    
     if site_code_input:
         st.write(f"Searching for technicians for site: **{site_code_input}**")
         try:
-        # --- MODIFICATION 1: Fetch 'id' along with other columns ---
+            # --- CHANGE 1: Fetch 'ID' (uppercase) ---
             tech_info_response = supabase.from_('TECH INFORMATION').select("*, ID").eq('SITE', site_code_input).execute()
             tech_info_data = tech_info_response.data
-
+    
             names_and_sites_response = supabase.from_('names_and_sites').select("*").execute()
             names_and_sites_data = names_and_sites_response.data
     
@@ -113,13 +113,10 @@ def Priority_1_Tickets():
                 if not merged_df.empty:
                     merged_df = merged_df.drop_duplicates(subset=['FIRST NAME', 'LAST NAME', 'SITE'], keep='first')
     
-                    # --- MODIFICATION 2: Store original 'TECHNICIAN STATUS' and 'id' for comparison ---
-                    # This dataframe holds the state BEFORE any user edits in st.data_editor
-                    original_status_df = merged_df[['ID', 'TECHNICIAN STATUS']].copy()
+                    # --- CHANGE 2: Store original 'TECHNICIAN STATUS' and 'ID' for comparison ---
+                    original_status_df = merged_df[['ID', 'TECHNICIAN STATUS']].copy() # Use 'ID' here
     
-                    # Columns to display in the data_editor
-                    # We need 'id' to be present in the DataFrame passed to data_editor
-                    # even if we disable its display to the user.
+                    # Columns to display in the data_editor. Ensure 'ID' is in df_tech_info.columns
                     display_columns = [col for col in df_tech_info.columns if col not in ['Full Name']]
     
     
@@ -135,8 +132,8 @@ def Priority_1_Tickets():
                     # Make all other columns non-editable
                     for col in display_columns:
                         if col != "TECHNICIAN STATUS":
-                            # --- MODIFICATION 3: Optionally hide 'id' column from user view ---
-                            if col == 'ID':
+                            # --- CHANGE 3: Optionally hide 'ID' column from user view ---
+                            if col == 'ID': # Use 'ID' here
                                 column_config[col] = st.column_config.TextColumn(col, disabled=True, width="COLUMN_WIDTH_SMALL")
                             else:
                                 column_config[col] = st.column_config.TextColumn(
@@ -145,56 +142,51 @@ def Priority_1_Tickets():
                                 )
                     
                     st.subheader("Edit Technician Status:")
-                    # Pass the DataFrame with 'id' column to data_editor
+                    # Pass the DataFrame with 'ID' column to data_editor
                     edited_df = st.data_editor(
-                        merged_df[display_columns], # Ensure 'id' is in display_columns
+                        merged_df[display_columns], # Ensure 'ID' is in display_columns
                         column_config=column_config,
                         hide_index=True,
                         key="tech_status_editor"
                     )
     
-                    # --- MODIFICATION 4: Logic to update Supabase ---
                     st.markdown("---")
                     st.subheader("Updating Technician Status in Database")
                     
                     changes_made_to_db = False
     
-                    # Iterate through the edited_df to find changes in 'TECHNICIAN STATUS'
                     for index, edited_row in edited_df.iterrows():
-                        # Find the corresponding original status using the 'id'
+                        # --- CHANGE 4: Use 'ID' for comparison and update ---
                         original_row_status = original_status_df[
-                            original_status_df['ID'] == edited_row['ID']
-                        ]['TECHNICIAN STATUS'].iloc[0] # .iloc[0] to get the scalar value
+                            original_status_df['ID'] == edited_row['ID'] # Use 'ID' here
+                        ]['TECHNICIAN STATUS'].iloc[0]
     
                         current_status_in_editor = edited_row['TECHNICIAN STATUS']
     
                         if current_status_in_editor != original_row_status:
                             changes_made_to_db = True
-                            st.info(f"Detected change for ID {edited_row['id']}: "
+                            st.info(f"Detected change for ID {edited_row['ID']}: " # Use 'ID' here
                                     f"'{original_row_status}' -> '{current_status_in_editor}'")
                             try:
-                                # Perform the update operation in Supabase
                                 update_data = {'TECHNICIAN STATUS': current_status_in_editor}
                                 update_response = supabase.from_('TECH INFORMATION') \
                                                           .update(update_data) \
                                                           .eq('ID', edited_row['ID']) \
-                                                          .execute()
+                                                          .execute() # Use 'ID' here
     
                                 if update_response.data:
-                                    st.success(f"Successfully updated status for Technician ID: {edited_row['id']}")
+                                    st.success(f"Successfully updated status for Technician ID: {edited_row['ID']}") # Use 'ID' here
                                 else:
-                                    st.error(f"Failed to update status for Technician ID: {edited_row['id']}. Error: {update_response.error}")
+                                    st.error(f"Failed to update status for Technician ID: {edited_row['ID']}. Error: {update_response.error}") # Use 'ID' here
     
                             except Exception as update_e:
-                                st.error(f"An error occurred while updating Technician ID: {edited_row['id']}: {update_e}")
+                                st.error(f"An error occurred while updating Technician ID: {edited_row['ID']}: {update_e}") # Use 'ID' here
                     
                     if not changes_made_to_db:
                         st.info("No changes were detected in 'TECHNICIAN STATUS' to update in Supabase.")
     
                     st.markdown("---")
                     st.subheader("Current Technician Data (Refreshed after updates):")
-                    # OPTIONAL: To show the absolute latest data from DB, you might re-fetch and re-process here
-                    # For simplicity, we'll just display the edited_df which has the most current user-made changes.
                     st.dataframe(edited_df)
     
                 else:
