@@ -80,89 +80,56 @@ def Priority_1_Tickets():
     site_code_input = st.text_input(
         "Enter 3-Letter Site Code:",
         max_chars=3,
-        help="e.g., 'ABC', 'XYZ'. This will filter technicians by site."
-    ).upper().strip()
-    
+        help="e.g., 'ABC', 'XYZ'. This will filter technicians by site.").upper().strip()
     if site_code_input:
         st.write(f"Searching for technicians for site: **{site_code_input}**")
         try:
-            # --- CHANGE 1: Fetch 'ID' (uppercase) ---
             tech_info_response = supabase.from_('TECH INFORMATION').select("*, ID").eq('SITE', site_code_input).execute()
             tech_info_data = tech_info_response.data
-    
             names_and_sites_response = supabase.from_('names_and_sites').select("*").execute()
             names_and_sites_data = names_and_sites_response.data
-    
             if tech_info_data and names_and_sites_data:
                 df_tech_info = pd.DataFrame(tech_info_data)
                 df_names_and_sites = pd.DataFrame(names_and_sites_data)
-    
                 df_tech_info['Full Name'] = df_tech_info['FIRST NAME'].fillna('') + ' ' + df_tech_info['LAST NAME'].fillna('')
                 df_tech_info['Full Name'] = df_tech_info['Full Name'].str.strip()
-    
                 df_names_and_sites_badged = df_names_and_sites[df_names_and_sites['Badge'] == 'YES']
-    
                 merged_df = pd.merge(
                     df_tech_info,
                     df_names_and_sites_badged,
                     left_on='Full Name',
                     right_on='Name',
-                    how='inner'
-                )
-    
+                    how='inner')
                 if not merged_df.empty:
                     merged_df = merged_df.drop_duplicates(subset=['FIRST NAME', 'LAST NAME', 'SITE'], keep='first')
-    
-                    # --- CHANGE 2: Store original 'TECHNICIAN STATUS' and 'ID' for comparison ---
                     original_status_df = merged_df[['ID', 'TECHNICIAN STATUS']].copy() # Use 'ID' here
-    
-                    # Columns to display in the data_editor. Ensure 'ID' is in df_tech_info.columns
                     display_columns = [col for col in df_tech_info.columns if col not in ['Full Name']]
-    
-    
-                    # Configure column editing
                     column_config = {
                         "TECHNICIAN STATUS": st.column_config.CheckboxColumn(
                             "TECHNICIAN STATUS",
                             help="Check to set technician status to active/true",
-                            default=False,
-                        )
-                    }
-    
-                    # Make all other columns non-editable
+                            default=False,)}
                     for col in display_columns:
                         if col != "TECHNICIAN STATUS":
-                            # --- CHANGE 3: Optionally hide 'ID' column from user view ---
                             if col == 'ID': # Use 'ID' here
                                 column_config[col] = st.column_config.TextColumn(col, disabled=True, width="COLUMN_WIDTH_SMALL")
                             else:
                                 column_config[col] = st.column_config.TextColumn(
                                     col,
-                                    disabled=True
-                                )
-                    
+                                    disabled=True)
                     st.subheader("Edit Technician Status:")
-                    # Pass the DataFrame with 'ID' column to data_editor
                     edited_df = st.data_editor(
                         merged_df[display_columns], # Ensure 'ID' is in display_columns
                         column_config=column_config,
                         hide_index=True,
-                        key="tech_status_editor"
-                    )
-    
+                        key="tech_status_editor")
                     st.markdown("---")
                     st.subheader("Updating Technician Status in Database")
-                    
                     changes_made_to_db = False
-    
                     for index, edited_row in edited_df.iterrows():
-                        # --- CHANGE 4: Use 'ID' for comparison and update ---
                         original_row_status = original_status_df[
-                            original_status_df['ID'] == edited_row['ID'] # Use 'ID' here
-                        ]['TECHNICIAN STATUS'].iloc[0]
-    
+                            original_status_df['ID'] == edited_row['ID']]['TECHNICIAN STATUS'].iloc[0]
                         current_status_in_editor = edited_row['TECHNICIAN STATUS']
-    
                         if current_status_in_editor != original_row_status:
                             changes_made_to_db = True
                             st.info(f"Detected change for ID {edited_row['ID']}: " # Use 'ID' here
@@ -173,38 +140,30 @@ def Priority_1_Tickets():
                                                           .update(update_data) \
                                                           .eq('ID', edited_row['ID']) \
                                                           .execute() # Use 'ID' here
-    
                                 if update_response.data:
-                                    st.success(f"Successfully updated status for Technician ID: {edited_row['ID']}") # Use 'ID' here
+                                    st.success(f"Successfully updated status for Technician ID: {edited_row['ID']}")
                                 else:
-                                    st.error(f"Failed to update status for Technician ID: {edited_row['ID']}. Error: {update_response.error}") # Use 'ID' here
-    
+                                    st.error(f"Failed to update status for Technician ID: {edited_row['ID']}. Error: {update_response.error}")
                             except Exception as update_e:
-                                st.error(f"An error occurred while updating Technician ID: {edited_row['ID']}: {update_e}") # Use 'ID' here
-                    
+                                st.error(f"An error occurred while updating Technician ID: {edited_row['ID']}: {update_e}")
                     if not changes_made_to_db:
                         st.info("No changes were detected in 'TECHNICIAN STATUS' to update in Supabase.")
-    
                     st.markdown("---")
                     st.subheader("Current Technician Data (Refreshed after updates):")
                     st.dataframe(edited_df)
-    
                 else:
                     st.info(f"No matching technicians with a 'YES' badge found for site code: **{site_code_input}**")
-    
             elif tech_info_data and not names_and_sites_data:
                 st.info("No data found in 'names_and_sites' to cross-reference technicians.")
             elif not tech_info_data and names_and_sites_data:
                 st.info(f"No technician information found for site code: **{site_code_input}**")
             else:
                 st.info(f"No technician information or badge information found for site code: **{site_code_input}**")
-    
         except Exception as e:
             st.error(f"An error occurred while fetching data from Supabase: {e}")
             st.warning("Please ensure your Supabase URL, Anon Key, and table/column names are correct.")
     else:
         st.info("Please enter a 3-letter site code to search for technicians.")
-    
     st.write("---")
     st.write("IV. Contact the Technician")
     st.markdown("""
