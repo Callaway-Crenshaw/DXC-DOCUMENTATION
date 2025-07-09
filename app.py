@@ -88,7 +88,6 @@ def Priority_1_Tickets():
             names_and_sites_response = supabase.from_('names_and_sites').select("*").execute()
             names_and_sites_data = names_and_sites_response.data
             if tech_info_data and names_and_sites_data:
-                import pandas as pd
                 df_tech_info = pd.DataFrame(tech_info_data)
                 df_names_and_sites = pd.DataFrame(names_and_sites_data)
                 df_tech_info['Full Name'] = df_tech_info['FIRST NAME'].fillna('') + ' ' + df_tech_info['LAST NAME'].fillna('')
@@ -102,21 +101,81 @@ def Priority_1_Tickets():
                     how='inner')
                 if not merged_df.empty:
                     merged_df = merged_df.drop_duplicates(subset=['FIRST NAME', 'LAST NAME', 'SITE'], keep='first')
-                    original_tech_info_columns = [col for col in df_tech_info.columns if col not in ['Full Name']]
-                    st.dataframe(merged_df[original_tech_info_columns])
+
+                    display_columns = [col for col in df_tech_info.columns if col not in ['Full Name']]
+                
+                    if 'TECHNICIAN STATUS' not in display_columns and 'TECHNICIAN STATUS' in merged_df.columns:
+                        display_columns.append('TECHNICIAN STATUS')
+                
+                    id_column = 'id'
+                    if id_column not in display_columns and id_column in merged_df.columns:
+                        display_columns.append(id_column)
+
+                    df_to_edit = merged_df[display_columns].copy()
+
+                    st.subheader("Technicians Found (Editable Status):")
+
+                    columns_to_disable = [col for col in df_to_edit.columns if col != 'TECHNICIAN STATUS']
+
+                    edited_df = st.data_editor(
+                        df_to_edit,
+                        column_config={
+                            "TECHNICIAN STATUS": st.column_config.SelectboxColumn(
+                                "Technician Status",
+                                help="Current status of the technician",
+                                width="medium",
+                                options=["Active", "Inactive", "On Leave", "Training"],
+                                required=True,),
+                            id_column: st.column_config.Column(
+                                label="",
+                                width="hidden") if id_column in df_to_edit.columns else st.column_config.Column(),},
+                        disabled=columns_to_disable,
+                        hide_index=True,
+                        key="technician_data_editor")
+
+                    if st.button("Save Changes to Technician Status"):
+                    
+                        if id_column not in merged_df.columns:
+                            st.error(f"Error: Primary key column '{id_column}' not found in 'TECH INFORMATION' data. Cannot save changes.")
+                        else:
+                            changes_detected = False
+                            for index, row in edited_df.iterrows():
+                                original_row = merged_df[merged_df[id_column] == row[id_column]].iloc[0]
+                            
+                                if 'TECHNICIAN STATUS' in row and row['TECHNICIAN STATUS'] != original_row.get('TECHNICIAN STATUS'):
+                                    changes_detected = True
+                                    try:
+                                        update_data = {
+                                            "TECHNICIAN STATUS": row['TECHNICIAN STATUS']}
+                                        response = supabase.from_('TECH INFORMATION').update(update_data).eq(id_column, row[id_column]).execute()
+                                        if response.data:
+                                            st.success(f"Updated status for {row['FIRST NAME']} {row['LAST NAME']} to {row['TECHNICIAN STATUS']}.")
+                                        elif response.error:
+                                            st.error(f"Error updating {row['FIRST NAME']} {row['LAST NAME']}: {response.error.message}")
+                                    except Exception as update_e:
+                                        st.error(f"An error occurred during update for {row['FIRST NAME']} {row['LAST NAME']}: {update_e}")
+                        
+                            if not changes_detected:
+                                st.info("No changes detected in 'TECHNICIAN STATUS'.")
+                            else:
+                                st.rerun()
+
                 else:
                     st.info(f"No matching technicians with a 'YES' badge found for site code: **{site_code_input}**")
+
             elif tech_info_data and not names_and_sites_data:
                 st.info("No data found in 'names_and_sites' to cross-reference technicians.")
             elif not tech_info_data and names_and_sites_data:
                 st.info(f"No technician information found for site code: **{site_code_input}**")
             else:
                 st.info(f"No technician information or badge information found for site code: **{site_code_input}**")
+
         except Exception as e:
             st.error(f"An error occurred while fetching data from Supabase: {e}")
             st.warning("Please ensure your Supabase URL, Anon Key, and table/column names are correct.")
     else:
         st.info("Please enter a 3-letter site code to search for technicians.")
+
     st.write("---")
     st.write("IV. Contact the Technician")
     st.markdown("""
