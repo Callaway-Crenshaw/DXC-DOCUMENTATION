@@ -169,24 +169,25 @@ def Priority_1_Tickets():
             st.image(images[2], use_container_width=True)
             st.write("Then change the status to work order created and save and close the ticket")
     st.markdown("""
-            1. Next, Login to field nation using your credentials
+            1. **If you have not clicked on the box above and went through those directions, DO THAT NOW**
+            2. Next, Login to field nation using your credentials
                 1. Here is the Link: https://app.fieldnation.com/workorders
-            2. Click on the Work tab at the top of the screen and then click Flightboard
-            3. Navigate to the Draft tab on the flightboard
-            4. Here you should see the work order as a draft, find the corresponding ID on the Draft page with the ConnectWise WO# and click on the corresponding title
-            5. Once in the work order, there are a few things that need to be checked
+            3. Click on the Work tab at the top of the screen and then click Flightboard
+            4. Navigate to the Draft tab on the flightboard
+            5. Here you should see the work order as a draft, find the corresponding ID on the Draft page with the ConnectWise WO# and click on the corresponding title
+            6. Once in the work order, there are a few things that need to be checked
                 1. Click on the Schedule box inside the work order
                     1. Change Schedule Type to (Hard Start)
                     2. Change the Date and Time to the agreed upon Date/Time and hit Save
-            6. Once the work order has been validated, go to the Providors tab inside the work order
+            7. Once the work order has been validated, go to the Providors tab inside the work order
                 1. Select Find Providors tab
                 2. Copy and paste the corresponding Field Nation ID from step 3 for the Identified Technician into the find providor search bar and hit enter
                 3. Validate that this is the correct name of the Identified Technician
                 4. Then slect the route button that is purple
-            7. Once the work order is routed in FieldNation, go into the ticket in ConnectWise and add a new note in Discussion
+            8. Once the work order is routed in FieldNation, go into the ticket in ConnectWise and add a new note in Discussion
                 1. Fill out this form with the Technicians Name, Email, and ETA
                     1. Name: TECHNICIAN NAME, Mail: TECHNICIAN EMAIL, ETA: DATE/TIME
-            8. If needed, adjust the title of the ConnectWise ticket to reflect the accurate date, and adjust the Start Date of Request to the start date.
+            9. If needed, adjust the title of the ConnectWise ticket to reflect the accurate date, and adjust the Start Date of Request to the start date.
                 """)
     st.write("---")
     st.write("VI. Work Order Specifics")
@@ -346,24 +347,25 @@ def Priority_2_Tickets():
             st.image(images[2], use_container_width=True)
             st.write("Then change the status to work order created and save and close the ticket")
     st.markdown("""
-            1. Next, Login to field nation using your credentials
+            1. **If you have not clicked on the box above and went through those directions, DO THAT NOW**
+            2. Next, Login to field nation using your credentials
                 1. Here is the Link: https://app.fieldnation.com/workorders
-            2. Click on the Work tab at the top of the screen and then click Flightboard
-            3. Navigate to the Draft tab on the flightboard
-            4. Here you should see the work order as a draft, find the corresponding ID on the Draft page with the ConnectWise WO# and click on the corresponding title
-            5. Once in the work order, there are a few things that need to be checked
+            3. Click on the Work tab at the top of the screen and then click Flightboard
+            4. Navigate to the Draft tab on the flightboard
+            5. Here you should see the work order as a draft, find the corresponding ID on the Draft page with the ConnectWise WO# and click on the corresponding title
+            6. Once in the work order, there are a few things that need to be checked
                 1. Click on the Schedule box inside the work order
                     1. Change Schedule Type to (Hard Start)
                     2. Change the Date and Time to the agreed upon Date/Time and hit Save
-            6. Once the work order has been validated, go to the Providors tab inside the work order
+            7. Once the work order has been validated, go to the Providors tab inside the work order
                 1. Select Find Providors tab
                 2. Copy and paste the corresponding Field Nation ID from step 3 for the Identified Technician into the find providor search bar and hit enter
                 3. Validate that this is the correct name of the Identified Technician
                 4. Then slect the route button that is purple
-            7. Once the work order is routed in FieldNation, go into the ticket in ConnectWise and add a new note in Discussion
+            8. Once the work order is routed in FieldNation, go into the ticket in ConnectWise and add a new note in Discussion
                 1. Fill out this form with the Technicians Name, Email, and ETA
                     1. Name: TECHNICIAN NAME, Mail: TECHNICIAN EMAIL, ETA: DATE/TIME
-            8. If needed, adjust the title of the ConnectWise ticket to reflect the accurate date, and adjust the Start Date of Request to the start date.
+            9. If needed, adjust the title of the ConnectWise ticket to reflect the accurate date, and adjust the Start Date of Request to the start date.
                 """)
     st.write("---")
     st.write("VI. Work Order Specifics")
@@ -479,18 +481,19 @@ def Priority_3_Tickets():
                     2. If the Technician declines, then move onto step 2
                     3. If the Technician does not answer, start a timer for 15 minutes before texting the next Technician
                     4. Then move to step 2
-                2. Call the next technician on the list
+                2. Text the next technician on the list
                     1. If the Technician answers and accepts the work order, **tell the technician you will be routing them a work order on field nation**, then move on to section V
                     2. If the Technician declines, then move onto step 3
                     3. If the Technician does not answer, start a timer for 15 minutes before texting the next Technician
                     4. Then move to step 3
-                3. Call the next technician on the list
+                3. Text the next technician on the list
                     1. If the Technician answers and accepts the work order, **tell the technician you will be routing them a work order on field nation**, then move on to section V
                     2. If the Technician declines, then move onto step 4
                     3. If the Technician does not answer, start a timer for 15 minutes before texting the next Technician
                     4. Then move to step 4                
-                4. If no Technician has answered the phone or responded by text, then wait 15 minutes
-                    1. **If no response after 15 minutes, Escalate to Callaway Crenshaw: 405-403-9513**
+                4. If no Technician has responded by text, then wait 15 minutes
+                    1. If no Technician has responded by then, go ahead and call the Technicians if it is during normal business hours
+                    2. **If no response after 15 minutes, Escalate to Callaway Crenshaw: 405-403-9513**
                 """)
     st.write("---")
     st.write("V. Assigning the Work Order in Field Nation")
@@ -522,24 +525,25 @@ def Priority_3_Tickets():
             st.image(images[2], use_container_width=True)
             st.write("Then change the status to work order created and save and close the ticket")
     st.markdown("""
-            1. Next, Login to field nation using your credentials
+            1. **If you have not clicked on the box above and went through those directions, DO THAT NOW**
+            2. Next, Login to field nation using your credentials
                 1. Here is the Link: https://app.fieldnation.com/workorders
-            2. Click on the Work tab at the top of the screen and then click Flightboard
-            3. Navigate to the Draft tab on the flightboard
-            4. Here you should see the work order as a draft, find the corresponding ID on the Draft page with the ConnectWise WO# and click on the corresponding title
-            5. Once in the work order, there are a few things that need to be checked
+            3. Click on the Work tab at the top of the screen and then click Flightboard
+            4. Navigate to the Draft tab on the flightboard
+            5. Here you should see the work order as a draft, find the corresponding ID on the Draft page with the ConnectWise WO# and click on the corresponding title
+            6. Once in the work order, there are a few things that need to be checked
                 1. Click on the Schedule box inside the work order
                     1. Change Schedule Type to (Hard Start)
                     2. Change the Date and Time to the agreed upon Date/Time and hit Save
-            6. Once the work order has been validated, go to the Providors tab inside the work order
+            7. Once the work order has been validated, go to the Providors tab inside the work order
                 1. Select Find Providors tab
                 2. Copy and paste the corresponding Field Nation ID from step 3 for the Identified Technician into the find providor search bar and hit enter
                 3. Validate that this is the correct name of the Identified Technician
                 4. Then slect the route button that is purple
-            7. Once the work order is routed in FieldNation, go into the ticket in ConnectWise and add a new note in Discussion
+            8. Once the work order is routed in FieldNation, go into the ticket in ConnectWise and add a new note in Discussion
                 1. Fill out this form with the Technicians Name, Email, and ETA
                     1. Name: TECHNICIAN NAME, Mail: TECHNICIAN EMAIL, ETA: DATE/TIME
-            8. If needed, adjust the title of the ConnectWise ticket to reflect the accurate date, and adjust the Start Date of Request to the start date.
+            9. If needed, adjust the title of the ConnectWise ticket to reflect the accurate date, and adjust the Start Date of Request to the start date.
                 """)
     st.write("---")
     st.write("VI. Work Order Specifics")
@@ -656,18 +660,19 @@ def Priority_4_Tickets():
                     2. If the Technician declines, then move onto step 2
                     3. If the Technician does not answer, start a timer for 15 minutes before texting the next Technician
                     4. Then move to step 2
-                2. Call the next technician on the list
+                2. Text the next technician on the list
                     1. If the Technician answers and accepts the work order, **tell the technician you will be routing them a work order on field nation**, then move on to section V
                     2. If the Technician declines, then move onto step 3
                     3. If the Technician does not answer, start a timer for 15 minutes before texting the next Technician
                     4. Then move to step 3
-                3. Call the next technician on the list
+                3. Text the next technician on the list
                     1. If the Technician answers and accepts the work order, **tell the technician you will be routing them a work order on field nation**, then move on to section V
                     2. If the Technician declines, then move onto step 4
                     3. If the Technician does not answer, start a timer for 15 minutes before texting the next Technician
                     4. Then move to step 4                
-                4. If no Technician has answered the phone or responded by text, then wait 15 minutes
-                    1. **If no response after 15 minutes, Escalate to Callaway Crenshaw: 405-403-9513**
+                4. If no Technician has responded by text, then wait 15 minutes
+                    1. If no Technician has responded by then, go ahead and call the Technicians if it is during normal business hours
+                    2. **If no response after 15 minutes, Escalate to Callaway Crenshaw: 405-403-9513**
                 """)
     st.write("---")
     st.write("V. Assigning the Work Order in Field Nation")
@@ -699,24 +704,25 @@ def Priority_4_Tickets():
             st.image(images[2], use_container_width=True)
             st.write("Then change the status to work order created and save and close the ticket")
     st.markdown("""
-            1. Next, Login to field nation using your credentials
+            1. **If you have not clicked on the box above and went through those directions, DO THAT NOW**
+            2. Next, Login to field nation using your credentials
                 1. Here is the Link: https://app.fieldnation.com/workorders
-            2. Click on the Work tab at the top of the screen and then click Flightboard
-            3. Navigate to the Draft tab on the flightboard
-            4. Here you should see the work order as a draft, find the corresponding ID on the Draft page with the ConnectWise WO# and click on the corresponding title
-            5. Once in the work order, there are a few things that need to be checked
+            3. Click on the Work tab at the top of the screen and then click Flightboard
+            4. Navigate to the Draft tab on the flightboard
+            5. Here you should see the work order as a draft, find the corresponding ID on the Draft page with the ConnectWise WO# and click on the corresponding title
+            6. Once in the work order, there are a few things that need to be checked
                 1. Click on the Schedule box inside the work order
                     1. Change Schedule Type to (Hard Start)
                     2. Change the Date and Time to the agreed upon Date/Time and hit Save
-            6. Once the work order has been validated, go to the Providors tab inside the work order
+            7. Once the work order has been validated, go to the Providors tab inside the work order
                 1. Select Find Providors tab
                 2. Copy and paste the corresponding Field Nation ID from step 3 for the Identified Technician into the find providor search bar and hit enter
                 3. Validate that this is the correct name of the Identified Technician
                 4. Then slect the route button that is purple
-            7. Once the work order is routed in FieldNation, go into the ticket in ConnectWise and add a new note in Discussion
+            8. Once the work order is routed in FieldNation, go into the ticket in ConnectWise and add a new note in Discussion
                 1. Fill out this form with the Technicians Name, Email, and ETA
                     1. Name: TECHNICIAN NAME, Mail: TECHNICIAN EMAIL, ETA: DATE/TIME
-            8. If needed, adjust the title of the ConnectWise ticket to reflect the accurate date, and adjust the Start Date of Request to the start date.
+            9. If needed, adjust the title of the ConnectWise ticket to reflect the accurate date, and adjust the Start Date of Request to the start date.
                 """)
     st.write("---")
     st.write("VI. Work Order Specifics")
