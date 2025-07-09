@@ -136,7 +136,7 @@ def Priority_1_Tickets():
                     for col in display_columns:
                         if col != "TECHNICIAN STATUS":
                             # --- MODIFICATION 3: Optionally hide 'id' column from user view ---
-                            if col == 'id':
+                            if col == 'ID':
                                 column_config[col] = st.column_config.TextColumn(col, disabled=True, width="COLUMN_WIDTH_SMALL")
                             else:
                                 column_config[col] = st.column_config.TextColumn(
@@ -177,7 +177,7 @@ def Priority_1_Tickets():
                                 update_data = {'TECHNICIAN STATUS': current_status_in_editor}
                                 update_response = supabase.from_('TECH INFORMATION') \
                                                           .update(update_data) \
-                                                          .eq('id', edited_row['id']) \
+                                                          .eq('ID', edited_row['ID']) \
                                                           .execute()
     
                                 if update_response.data:
