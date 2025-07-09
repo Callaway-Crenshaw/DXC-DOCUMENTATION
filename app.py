@@ -118,7 +118,7 @@ def Priority_1_Tickets():
                                     col,
                                     disabled=True)
                     st.subheader("Technician Status:")
-                    st.markdown("""If all Technician Boxes are checked for the site, then uncheck them all before contacting the Technicians. Contact the Technicians with unchecked boxes for the site first. Then once one is identified, check the status box if it is unchecked""")
+                    st.markdown("""If all Technician Boxes are checked for the site, then uncheck them all before contacting the Technicians. Contact the Technicians with unchecked boxes for the site first. Then once a Technician is identified, check the status box if it is unchecked""")
                     edited_df = st.data_editor(
                         merged_df[display_columns],
                         column_config=column_config,
